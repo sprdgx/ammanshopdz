@@ -197,7 +197,7 @@ const Product = ({themeToggler,theme}) => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
-            <Button onClick={handleClick}>ADD TO CART</Button>
+            <Button onClick={handleClick}>Ajouter Au Panier</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

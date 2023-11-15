@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { placeOrder } from "../redux/apiCalls";
-import { Button, Container, Input } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
+import "./checkorder.css";
+import CloseIcon from '@material-ui/icons/Close'
+import PersonIcon from '@material-ui/icons/Person';
+import PhoneIcon from '@material-ui/icons/Phone';
+import RoomIcon from '@material-ui/icons/Room';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const Popup = ({ setIsOpenPopup }) => {
   const [clientName, setClientName] = useState("");
@@ -35,24 +42,52 @@ const Popup = ({ setIsOpenPopup }) => {
   function renderCheckoutOrFillCart() {
     if (!cart.products || cart.products.length > 0) {
       return (
-        <Container>
-          <Input
-            placeholder="Username"
-            onChange={(e) => setClientName(e.target.value)}
-          />
-          <Input
-            placeholder="Phone Number"
-            onChange={(e) => setClientNumber(e.target.value)}
-          />
-          <Input
-            placeholder="Address"
-            onChange={(e) => setClientAddress(e.target.value)}
-          />
-          <Button onClick={handleClick}>Place Order</Button>
-        </Container>
+          <form class="form">
+              <TextField
+                placeholder="Votre nom complet"
+                onChange={(e) => setClientName(e.target.value)}
+                className="input-1"
+                type="text"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <PersonIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                placeholder="Ton Numéro de téléphone"
+                onChange={(e) => setClientNumber(e.target.value)}
+                className="input-1"
+                type="text"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <PhoneIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                placeholder="Votre Adresse"
+                onChange={(e) => setClientAddress(e.target.value)}
+                className="input-1"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <RoomIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <button variant="contained" color="primary" className="button-1" onClick={handleClick}>
+                Passer la commande
+              </button>
+          </form>
       );
     } else {
-      return <div>Fill Cart</div>;
+      return <div class='empty'>Panier vide📭, Veuillez remplir le😊.</div>;
     }
   }
 
@@ -75,25 +110,25 @@ const Popup = ({ setIsOpenPopup }) => {
         onClick={(e) => e.stopPropagation()}
         style={{
           position: "relative",
-          background: "white",
           borderRadius: "8px",
-          width: "250px",
+          width: "450px",
+          height:'400px',
           padding: "20px 10px",
           animation: "dropTop .3s linear",
         }}
       >
+        {renderCheckoutOrFillCart()}
         <div
           onClick={setIsOpenPopup.bind(this, false)}
           style={{
             cursor: "pointer",
             position: "absolute",
-            top: 10,
-            right: 10,
+            top: 105,
+            right: 15,
           }}
         >
-          Close
+          <CloseIcon style={{ color: 'red', fontWeight: 'bold', fontSize: '30px' }} />
         </div>
-        {renderCheckoutOrFillCart()}
       </div>
     </div>
   );

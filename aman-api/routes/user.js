@@ -5,7 +5,7 @@ const {
 } = require("./verifyToken");
 
 //UPDATE
-router.put("/:userId",verifyTokenAndAdmin, async (req, res) => {
+router.put("/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
     const updatedUserData = req.body;
@@ -39,7 +39,7 @@ router.put("/:userId",verifyTokenAndAdmin, async (req, res) => {
 
 
 //DELETE
-router.delete("/:id",verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
     res.status(200).json("User has been deleted...");
@@ -49,7 +49,7 @@ router.delete("/:id",verifyTokenAndAdmin, async (req, res) => {
 });
 
 //GET USER
-router.get("/:userId",verifyTokenAndAdmin, async (req, res) => {
+router.get("/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
     const user = await User.findById(userId);
@@ -69,7 +69,7 @@ module.exports = router;
 
 
 //GET ALL USER
-router.get("/",verifyTokenAndAdmin, async (req, res) => {
+router.get("/", async (req, res) => {
   const query = req.query.new;
   try {
     const users = query
@@ -83,7 +83,7 @@ router.get("/",verifyTokenAndAdmin, async (req, res) => {
 
 //GET USER STATS
 
-router.get("/stats",verifyTokenAndAdmin, async (req, res) => {
+router.get("/stats", async (req, res) => {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
 

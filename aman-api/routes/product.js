@@ -6,7 +6,7 @@ const {
 
 //CREATE
 
-router.post("/",verifyTokenAndAdmin, async (req, res) => {
+router.post("/", async (req, res) => {
   const newProduct = new Product(req.body);
 
   try {
@@ -18,7 +18,7 @@ router.post("/",verifyTokenAndAdmin, async (req, res) => {
 });
 
 //UPDATE
-router.put("/:productId",verifyTokenAndAdmin, async (req, res) => {
+router.put("/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
     const updatedProductData = req.body;
@@ -38,7 +38,7 @@ router.put("/:productId",verifyTokenAndAdmin, async (req, res) => {
 });
 
 //DELETE
-router.delete("/:productId",verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
     const deletedProduct = await Product.findByIdAndRemove(productId);

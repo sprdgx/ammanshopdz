@@ -1,0 +1,108 @@
+.productList {
+  flex: 4;
+  padding: 20px;
+  height: 100vh;
+  width: 100vw;
+}
+
+.productListItem {
+  display: flex;
+  align-items: center;
+}
+
+.productListImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.productListEdit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.productListDelete {
+  color: red;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 550px) {
+  .productList {
+    padding: 0;
+    margin-top: 50px;
+  }
+}
+
+
+.confirmed{
+  color: rgb(0, 124, 0);
+  font-size: x-large;
+}
+
+@media only screen and (max-width: 550px) {
+  .productList {
+    flex: 4;
+    padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .productBlock {
+    flex: 1;
+    margin: 10px;
+  }
+
+  .productListItem {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .productListEdit {
+    margin-right: 0; /* Remove margin-right on small screens */
+  }
+}
+
+.confirmedbutton {
+  --green: #fd1b1b;
+  font-size: 13px;
+  padding: 1.5em 0.9em;
+  letter-spacing: 0.06em;
+  position: relative;
+  font-family: inherit;
+  border-radius: 0.6em;
+  overflow: hidden;
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  background: linear-gradient(to right, rgba(253, 27, 27, 0.1) 1%, transparent 40%,transparent 60% , rgba(253, 27, 27, 0.1) 100%);
+  color: var(--green);
+  box-shadow: inset 0 0 10px rgba(253, 27, 27, 0.4), 0 0 9px 3px rrgba(253, 27, 27, 0.1)
+}
+
+.confirmedbutton:hover {
+  color: #ff8282;
+  box-shadow: inset 0 0 10px rgba(253, 27, 27, 0.6), 0 0 9px 3px rrgba(253, 27, 27, 0.2)
+}
+
+.confirmedbutton:before {
+  content: "";
+  position: absolute;
+  left: -4em;
+  width: 4em;
+  height: 100%;
+  top: 0;
+  transition: transform .4s ease-in-out;
+  background: linear-gradient(to right, transparent 1%, rgba(253, 27, 27, 0.1) 40%,rgba(253, 27, 27, 0.1) 60% , transparent 100%);
+}
+
+.confirmedbutton:hover:before {
+  transform: translateX(15em);
+}

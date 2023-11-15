@@ -166,7 +166,6 @@ const Cart = ({themeToggler,theme}) => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton onClick={setIsOpenPopup.bind(this, true)} type="filled">CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -219,6 +218,7 @@ const Cart = ({themeToggler,theme}) => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice> {cart.total} DA</SummaryItemPrice>
             </SummaryItem>
+            <TopButton onClick={setIsOpenPopup.bind(this, true)} type="filled">FINALISER L'ACHAT</TopButton>
             {isOpenPopup && <CheckOrder setIsOpenPopup={setIsOpenPopup} />}
           </Summary>
         </Bottom>

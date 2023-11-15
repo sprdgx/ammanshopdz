@@ -34,7 +34,7 @@ router.post("/placeorder", async (req, res) => {
 
 
 // Update the 'confirmed' field for a specific order
-router.put("/confirm/:orderId", verifyTokenAndAdmin, async (req, res) => {
+router.put("/confirm/:orderId", async (req, res) => {
   try {
     const orderId = req.params.orderId;
 

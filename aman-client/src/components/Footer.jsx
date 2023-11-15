@@ -91,11 +91,9 @@ const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>AMMANSHOP.</Logo>
+        <Logo>AMANSHOP.</Logo>
         <Desc>
-          There are many variations of passages of Lorem Ipsum available, but
-          the majority have suffered alteration in some form, by injected
-          humour, or randomised words which don’t look even slightly believable.
+        Amanshop : Votre destination pour l'électroménager, l'informatique et les livres, offrant qualité et diversité. Équipez votre maison, optimisez vos technologies et enrichissez votre collection littéraire avec confiance grâce à nos produits de pointe et à notre service client dévoué.
         </Desc>
         <SocialContainer> 
           <a href="https://www.facebook.com/profile.php?id=61552805934954" target="_blank">
@@ -110,31 +108,16 @@ const Footer = () => {
           </a>
         </SocialContainer>
       </Left>
-      <Center>
-        <Title>Useful Links</Title>
-        <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Man Fashion</ListItem>
-          <ListItem>Woman Fashion</ListItem>
-          <ListItem>Accessories</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
-        </List>
-      </Center>
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room style={{marginRight:"10px"}}/> Tamaris , Alger , Algeria
+          <Room style={{marginRight:"10px"}}/>24 Rue des Mandarines groupe des propriétés 243 Tamaris Mohammadia Alger
         </ContactItem>
         <ContactItem>
-          <Phone style={{marginRight:"10px"}}/> +1 234 567 89
+          <Phone style={{marginRight:"10px"}}/> +213560152618/+213560075910
         </ContactItem>
         <ContactItem>
-          <MailOutline style={{marginRight:"10px"}} /> contact@ammanshop.dz
+          <MailOutline style={{marginRight:"10px"}} /> aman@ammanshopdz.com
         </ContactItem>
       </Right>
     </Container>

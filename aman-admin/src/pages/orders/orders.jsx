@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { userRequest } from "../../requestMethods";
 import { DataGrid } from "@mui/x-data-grid";
-import './productList.css'
+import './orders.css'
 import { getOrders } from '../../redux/apiCalls';
 import { useDispatch } from 'react-redux';
 

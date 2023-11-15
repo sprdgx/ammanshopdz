@@ -67,40 +67,12 @@ const ProductList = ({themeToggler,theme}) => {
       <Announcement />
       <Title style={{  color:'teal' }} >{cat}: </Title>
       <FilterContainer>
-      {cat !== 'Livres' && (
-      <Filter>
-          <FilterText>Filter Products:</FilterText>
-          <Select name='color' onChange={handleFilters} >
-            <Option disabled >
-              Color
-            </Option>
-            <Option>White</Option>
-            <Option>Black</Option>
-            <Option>Red</Option>
-            <Option>Blue</Option>
-            <Option>Yellow</Option>
-            <Option>Green</Option>
-          </Select>
-          {(cat !== 'Informatique' && cat !== 'Electromenager') && (
-          <Select name='size' onChange={handleFilters}>
-            <Option disabled >
-              Size
-            </Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
-          </Select>
-          )}
-        </Filter>
-        )}
         <Filter>
-          <FilterText>Sort Products:</FilterText>
+          <FilterText>Classer par :</FilterText>
           <Select onChange={(e) => setSort(e.target.value)}>
-            <Option value="newest">Newest</Option>
-            <Option value="asc">Price (asc)</Option>
-            <Option value="desc">Price (desc)</Option>
+            <Option value="newest">Nouveautés</Option>
+            <Option value="asc">Prix (croissant)</Option>
+            <Option value="desc">Prix (décroissant)</Option>
           </Select>
         </Filter>
       </FilterContainer>

@@ -3,22 +3,25 @@ export const sliderItems = [
       id: 1,
       img: "https://raw.githubusercontent.com/sprdgx/ammanshop-pictures/main/electromenager.jpg?token=GHSAT0AAAAAACIGBO72LAMZ2JDQ6ZN4ZSGGZKBSYQQ",
       title: "Electro-menager",
-      desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+      desc: "Achetez vos électroménagers ici pour une maison moderne et fonctionnelle!",
       bg: "f5fafd",
+      route:'/products/electromenager'
     },
     {
       id: 2,
       img: "https://www.dpreview.com/files/p/articles/2148903295/Razer_Blade_14__2021__Gaming_-_3_Alt.jpeg",
       title: "Informatique",
-      desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+      desc: "Trouvez ici tout ce dont vous avez besoin en informatique pour des équipements performants et innovants!S.",
       bg: "fcf1ed",
+      route:'/products/informatique'
     },
     {
       id: 3,
       img: "https://github.com/sprdgx/ammanshop-pictures/blob/main/livre.jpg?raw=true",
       title: "Les Livres",
-      desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
+      desc: "Découvrez notre large sélection de livres pour nourrir votre esprit et enrichir votre bibliothèque!",
       bg: "fbf0f4",
+      route:'/products/livres'
     },
   ];
 

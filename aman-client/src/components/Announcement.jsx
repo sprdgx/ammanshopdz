@@ -20,7 +20,7 @@ const Container = styled.div`
 `;
 
 const Announcement = () => {
-  return <Container>Super Deal! Free Shipping on Orders Over 45.000DA </Container>;
+  return <Container>Super affaire! Livraison gratuite pour les commandes supérieures à 10 000 DA</Container>;
 };
 
 export default Announcement;
