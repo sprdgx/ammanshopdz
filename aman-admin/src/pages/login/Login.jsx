@@ -2,10 +2,13 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/apiCalls";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import "./login.css";
 
 
 
+=======
+>>>>>>> 0545d859faf63775835af238d742b839b4cf0296
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -23,6 +26,7 @@ const Login = () => {
     }
   };
 
+<<<<<<< HEAD
   return (
       <div class='cont'>   
           <div class="container">
@@ -41,5 +45,25 @@ const Login = () => {
           </div>
       </div>         
   )}
+=======
+
+  return (
+    <div>
+          <input
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+         />
+          <input
+            placeholder="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button onClick={handleClick}>
+            LOGIN
+          </button>
+      </div>
+  );
+};
+>>>>>>> 0545d859faf63775835af238d742b839b4cf0296
 
 export default Login;
