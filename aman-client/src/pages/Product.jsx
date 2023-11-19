@@ -165,6 +165,15 @@ const Product = ({themeToggler,theme}) => {
         <InfoContainer>
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
+          {product.detail && (
+            <div>
+              <ul>
+                {product.detail.map((detail, index) => (
+                  <li key={index}>{detail}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <Price>{product.price} DA </Price>
           <FilterContainer>
           {product.color && (

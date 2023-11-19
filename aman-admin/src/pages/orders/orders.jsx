@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { userRequest } from "../../requestMethods";
 import { DataGrid } from "@mui/x-data-grid";
 import './orders.css'
+import { getOrders as fetchOrders } from '../../redux/apiCalls'; // Renamed getOrders to avoid conflict
 import { getOrders } from '../../redux/apiCalls';
 import { useDispatch } from 'react-redux';
 
@@ -9,8 +10,18 @@ export default function Orders() {
   const [orders, setOrders] = useState([]);
   const dispatch = useDispatch();
 
+  const handleDeleteOrder = async (orderId) => {
+    try {
+      await userRequest.delete(`/orders/${orderId}`);
+      // Optionally update state or refresh the orders list after deletion
+      fetchOrders(dispatch); // Refresh the orders list using imported function
+    } catch (error) {
+      console.error("Error deleting order:", error);
+    }
+  };
+
   useEffect(() => {
-    const getOrders = async () => {
+    const getOrders = async (dispatch) => {
       try {
         const res = await userRequest.get("/orders");
         setOrders(res.data);
@@ -20,7 +31,7 @@ export default function Orders() {
     };
 
     // Call the function to fetch orders
-    getOrders();
+    getOrders(dispatch);
   }, [dispatch]);
 
   const handleConfirmOrder = async (orderId) => {
@@ -92,15 +103,16 @@ export default function Orders() {
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 250,
       renderCell: (params) => {
         const isConfirmed = params.row.confirmed;
-
+    
         return (
           <div className='action'>
             {isConfirmed ? (
               <span className="confirmed" >Confirmed</span>
             ) : (
+              <>
                 <button
                   className="confirmedbutton"
                   onClick={() => handleConfirmOrder(params.row._id)}
@@ -108,11 +120,19 @@ export default function Orders() {
                 >
                   Confirm Order
                 </button>
+                <button
+                  className="deleteButton"
+                  onClick={() => handleDeleteOrder(params.row._id)}
+                >
+                  Delete Order
+                </button>
+              </>
             )}
           </div>
         );
       },
     },
+    
   ];
 
   return (

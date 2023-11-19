@@ -1,9 +1,7 @@
 const Order = require("../models/Order");
+const Product = require("../models/Product");
 const router = require("express").Router();
-const {
-  verifyTokenAndAdmin,
-} = require("./verifyToken");
-
+const { verifyTokenAndAdmin } = require("./verifyToken");
 
 // Create an order
 router.post("/placeorder", async (req, res) => {
@@ -13,22 +11,55 @@ router.post("/placeorder", async (req, res) => {
       clientNumber,
       clientAddress,
       price,
-      products,
+      products: orderedProducts,
     } = req.body;
+
+    const updatedProducts = [];
+
+    for (const { productId, quantity, image } of orderedProducts) {
+      const product = await Product.findById(productId);
+
+      if (!product) {
+        return res.status(404).json({ message: `Product with ID ${productId} not found` });
+      }
+
+      if (product.inStock < quantity) {
+        return res.status(400).json({ message: `Insufficient stock for product with ID ${productId}` });
+      }
+
+      product.inStock -= quantity; // Deduct the quantity ordered from available stock
+      updatedProducts.push(product.save()); // Queue the product update
+    }
+
+    // Wait for all product updates to complete
+    await Promise.all(updatedProducts);
+
+    // Create a new order with the products including their quantities and images
+    const productsWithDetails = orderedProducts.map(({ productId, quantity, image }) => {
+      return {
+        productId,
+        quantity,
+        image,
+      };
+    });
 
     const newOrder = new Order({
       clientName,
       clientNumber,
       clientAddress,
       price,
-      products,
+      products: productsWithDetails,
     });
 
-    const savedOrder = await newOrder.save();
+    const savedOrder = await newOrder.save(); // Save the order details
 
     res.status(201).json(savedOrder);
-  } catch (err) {
-    res.status(500).json(err);
+  } catch (error) {
+    // Log the error for debugging purposes
+    console.error("Error placing the order:", error);
+
+    // Send an appropriate error response to the frontend
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
@@ -53,11 +84,25 @@ router.put("/confirm/:orderId", async (req, res) => {
   }
 });
 
+// DELETE an order by ID
+router.delete("/:orderId", async (req, res) => {
+  try {
+    const orderId = req.params.orderId;
+    const deletedOrder = await Order.findByIdAndDelete(orderId);
 
+    if (!deletedOrder) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    res.status(200).json({ message: "Order deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting order:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 //GET ALL
-
-router.get("/",verifyTokenAndAdmin, async (req, res) => {
+router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     const orders = await Order.find();
     res.status(200).json(orders);
@@ -65,8 +110,5 @@ router.get("/",verifyTokenAndAdmin, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// GET MONTHLY INCOME
-
 
 module.exports = router;
