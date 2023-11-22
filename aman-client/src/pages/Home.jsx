@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
+import Map from "../components/Map";
 
 
 
@@ -22,6 +23,7 @@ const Home = ({themeToggler, theme}) => {
       <Categories />
       <Products/>
       <Footer/>
+      <Map/>
       </div>
   );
 };

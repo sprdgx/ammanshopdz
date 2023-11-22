@@ -5,8 +5,8 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import ASvert from '../style/ASvert.png'
 import '../style/toggle.css'
+import MN from '../Assets/MN.png'
 
 const Container = styled.div`
   height: 60px;
@@ -61,7 +61,7 @@ const Navbar = ({themeToggler, theme}) => {
       <Wrapper>
         <Left>
           <Link to='/'>
-          <img src={ASvert} height={40} width={40} />
+          <img src={MN} height={40} width={60} />
           </Link>
         </Left>
 

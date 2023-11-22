@@ -2,19 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { userRequest } from "../../requestMethods";
 import { DataGrid } from "@mui/x-data-grid";
 import './orders.css'
-import { getOrders as fetchOrders } from '../../redux/apiCalls'; // Renamed getOrders to avoid conflict
+import { getOrders as fetchOrders } from '../../redux/apiCalls';
 import { getOrders } from '../../redux/apiCalls';
 import { useDispatch } from 'react-redux';
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
+  const [not, setNot] = useState(null);
   const dispatch = useDispatch();
 
   const handleDeleteOrder = async (orderId) => {
     try {
       await userRequest.delete(`/orders/${orderId}`);
-      // Optionally update state or refresh the orders list after deletion
-      fetchOrders(dispatch); // Refresh the orders list using imported function
+      setNot('Order deleted successfully');
+      fetchOrders(dispatch);
+      setTimeout(() => {
+        setNot(null);
+        window.location.reload();
+      }, 3000); 
     } catch (error) {
       console.error("Error deleting order:", error);
     }
@@ -37,10 +42,13 @@ export default function Orders() {
   const handleConfirmOrder = async (orderId) => {
     try {
       const res = await userRequest.put(`/orders/confirm/${orderId}`);
-      // Handle the response or update the state accordingly
       console.log("Order confirmed:", res.data);
-      // You may want to refresh the orders after confirmation
-      getOrders(); // Make sure getOrders has access to dispatch
+      setNot('Order Confirmed successfully');
+      getOrders();
+      setTimeout(() => {
+        setNot(null);
+        window.location.reload();
+      }, 3000); 
     } catch (error) {
       console.error("Error confirming order:", error);
     }
@@ -110,7 +118,15 @@ export default function Orders() {
         return (
           <div className='action'>
             {isConfirmed ? (
-              <span className="confirmed" >Confirmed</span>
+              <>
+              <span className="confirmed">Confirmed</span>
+              <button
+                className="deleteButton"
+                onClick={() => handleDeleteOrder(params.row._id)}
+              >
+                Delete Order
+              </button>
+              </>
             ) : (
               <>
                 <button
@@ -121,11 +137,11 @@ export default function Orders() {
                   Confirm Order
                 </button>
                 <button
-                  className="deleteButton"
-                  onClick={() => handleDeleteOrder(params.row._id)}
+                className="deleteButton"
+                onClick={() => handleDeleteOrder(params.row._id)}
                 >
-                  Delete Order
-                </button>
+                Delete Order
+              </button>
               </>
             )}
           </div>
@@ -137,6 +153,11 @@ export default function Orders() {
 
   return (
     <div className="productList">
+      {not && (
+        <div className="customNotification">
+          {not}
+        </div>
+      )}
       <DataGrid
         rows={orders}
         columns={columns}

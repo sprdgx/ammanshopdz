@@ -12,7 +12,7 @@ import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
-  ${mobile({ flexDirection: "column" })}
+  ${mobile({ flexDirection: "column" ,})}
 `;
 
 const Left = styled.div`
@@ -50,34 +50,15 @@ const SocialIcon = styled.div`
   margin-right: 20px;
 `;
 
-const Center = styled.div`
-  flex: 1;
-  padding: 20px;
-  ${mobile({ display: "none" })}
-`;
 
 const Title = styled.h3`
   margin-bottom: 30px;
 `;
 
-const List = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const ListItem = styled.li`
-  width: 50%;
-  margin-bottom: 10px;
-`;
 
 const Right = styled.div`
   flex: 1;
   padding: 20px;
-  ${mobile({ backgroundColor: "#fff8f8" })}
-
 `;
 
 const ContactItem = styled.div`
@@ -114,7 +95,7 @@ const Footer = () => {
           <Room style={{marginRight:"10px"}}/>24 Rue des Mandarines groupe des propriétés 243 Tamaris Mohammadia Alger
         </ContactItem>
         <ContactItem>
-          <Phone style={{marginRight:"10px"}}/> +213560152618/+213560075910
+          <Phone style={{marginRight:"10px"}}/> 0560152618/0560075910
         </ContactItem>
         <ContactItem>
           <MailOutline style={{marginRight:"10px"}} /> aman@ammanshopdz.com
