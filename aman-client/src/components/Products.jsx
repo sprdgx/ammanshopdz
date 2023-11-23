@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background-color: #b2dfdb;
+  background-color: teal;
   margin-top: 1cm;
   margin-left: 4%;
   border-radius: 20px;

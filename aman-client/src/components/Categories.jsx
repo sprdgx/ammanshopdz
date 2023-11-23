@@ -8,7 +8,7 @@ const Container = styled.div`
   padding: 20px;
   justify-content: space-between;
   border-radius: 10px;
-  background-color: #b2dfdb;
+  background-color: teal;
   height: auto;
   width: 90%;
   margin-left: 1.4cm;
