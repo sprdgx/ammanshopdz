@@ -7,13 +7,17 @@ const Container = styled.div`
   display: flex;
   padding: 20px;
   justify-content: space-between;
-  border-radius: 20px;
-  background-color : teal;
-  height: 400px;
-  width: 89%;
-  margin-left:4%;
-  ${mobile({ padding: "0px", flexDirection:"column", height:'800px', width:'85%', marginLeft:'7%', })}
-
+  border-radius: 10px;
+  background-color: #b2dfdb;
+  height: auto;
+  width: 90%;
+  margin-left: 1.4cm;
+  gap: 17px;
+  ${mobile({
+    padding: "10px 5px",
+    margin: "50px 10px",
+    flexDirection: "column",
+  })}
 `;
 
 const Categories = () => {

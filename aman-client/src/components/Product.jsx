@@ -1,6 +1,4 @@
-import {
-  ShoppingCartOutlined,
-} from "@material-ui/icons";
+import { ShoppingCartOutlined } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -29,18 +27,17 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: teal;
+  background-color: #b2dfdb;
   position: relative;
   border-radius: 20px;
-
-  &:hover ${Info}{
+  &:hover ${Info} {
     opacity: 1;
   }
 `;
 
-
 const Image = styled.img`
   height: 75%;
+  border-radius: 10px;
   z-index: 2;
   border-radius: 20px;
 `;
@@ -65,12 +62,12 @@ const Product = ({ item }) => {
   return (
     <Container>
       <Link to={`/product/${item._id}`}>
-      <Image src={item.img} height={300} width={300} />
-      <Info>
-        <Icon>
-          <ShoppingCartOutlined style={{ color: 'teal' }}  />
-        </Icon>
-      </Info>
+        <Image src={item.img} height={300} width={300} />
+        <Info>
+          <Icon>
+            <ShoppingCartOutlined style={{ color: "teal" }} />
+          </Icon>
+        </Info>
       </Link>
     </Container>
   );

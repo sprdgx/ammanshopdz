@@ -13,14 +13,14 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   border-radius: 20px;
-  margin-left:20px;
-  ${mobile({ height:'300px', width:'89%', })}
+  margin-left: 20px;
+  ${mobile({ height: "300px", width: "89%" })}
 `;
 
 const Arrow = styled.div`
   width: 40px;
   height: 40px;
-  background-color: teal;
+  background-color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -49,27 +49,27 @@ const Slide = styled.div`
   display: flex;
   align-items: center;
   background-color: teal;
-  ${mobile({ height:'100%', width: '35vh', })}
+  ${mobile({ height: "100%", width: "35vh" })}
 `;
 
 const ImgContainer = styled.div`
   height: 100%;
   width: 700px;
   flex: 1;
-  ${mobile({ })}
+  ${mobile({})}
 `;
 
 const Image = styled.img`
   height: 100%;
   width: 700px;
-  ${mobile({ width: '70vh',  })}
+  ${mobile({ width: "70vh" })}
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
   padding: 50px;
-  margin-top:-80px;
-  ${mobile({  display:'none' })}
+  margin-top: -80px;
+  ${mobile({ display: "none" })}
 `;
 
 const Title = styled.h1`

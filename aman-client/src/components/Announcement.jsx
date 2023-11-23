@@ -12,15 +12,24 @@ const Container = styled.div`
   font-weight: 500;
   border-radius: 10px;
   width: 500px;
-  margin-top: -0.3%;
+  margin: 0 auto;
   margin-bottom: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  ${mobile({ marginLeft: "5px", fontSize: "10px", width: "400px", marginTop: '2%' })}
+  overflow: hidden;
+  ${mobile({
+    fontSize: "10px",
+    marginTop: "2%",
+    borderRadius: "0",
+    width: "100%",
+  })}
 `;
 
 const Announcement = () => {
-  return <Container>Super affaire! Livraison gratuite pour les commandes supérieures à 10 000 DA</Container>;
+  return (
+    <Container>
+      Super affaire! Livraison gratuite pour les commandes supérieures à 10 000
+      DA
+    </Container>
+  );
 };
 
 export default Announcement;
