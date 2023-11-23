@@ -3,65 +3,70 @@ import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  flex: 1;
-  margin: 3px;
-  height: 70vh;
-  margin-left: 25px;
-  margin-top: 25px;
   position: relative;
-  `;
-
-const Image = styled.img`
-  width: 90%;
-  height: 78%;
-  object-fit: cover;
-  border-radius: 20px;
-  ${mobile({ height: "20vh" })}
+  height: 100%;
+  width: 100%;
 `;
 
 const Info = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 90%;
-  height: 78%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color : rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
-  ${mobile({ height: "77%" })}
+  ${mobile({
+    textAlign: "center",
+  })}
+`;
 
+const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 350px;
+  border-radius: 20px;
+  overflow: hidden;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const Title = styled.h1`
-    color:white;
-    margin-bottom: 20px;
+  color: white;
+  margin-bottom: 20px;
 `;
 
 const Button = styled.button`
-    border:none;
-    padding: 10px;
-    background-color: teal;
-    color:white;
-    cursor: pointer;
-    font-weight: 600;
+  border: none;
+  padding: 10px;
+  background-color: teal;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
 `;
 
 const CategoryItem = ({ item }) => {
   return (
-
     <Container>
       <Link to={`/products/${item.cat}`}>
-      <Image src={item.img} />
-      <Info>
-        <Title>{item.title}</Title>
-        <Button>Acheter Maintenant</Button>
-      </Info>
+        <ImageContainer>
+          <Image src={item.img} />
+          <Info>
+            <Title>{item.title}</Title>
+            <Button>Acheter Maintenant</Button>
+          </Info>
+        </ImageContainer>
       </Link>
     </Container>
-
   );
 };
 
