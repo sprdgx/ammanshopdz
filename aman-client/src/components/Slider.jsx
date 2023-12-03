@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
+import LazyLoad from 'react-lazyload';
 
 const Container = styled.div`
   width: 97%;
@@ -54,16 +55,15 @@ const Slide = styled.div`
 `;
 
 const ImgContainer = styled.div`
-  height: 100%;
   width: 700px;
   flex: 1;
   ${mobile({})}
 `;
 
 const Image = styled.img`
-  height: 100%;
-  width: 700px;
-  ${mobile({ width: "70vh" })}
+  height: 650px;
+  width: 650px;
+  ${mobile({ width: "600px", height:'400px' })}
 `;
 
 const InfoContainer = styled.div`
@@ -110,7 +110,9 @@ const Slider = () => {
         {sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id}>
             <ImgContainer>
-              <Image src={item.img} />
+              <LazyLoad height={700}>
+                <Image src={item.img} />
+              </LazyLoad>
             </ImgContainer>
             <InfoContainer>
               <Title>{item.title}</Title>
