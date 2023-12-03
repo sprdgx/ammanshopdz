@@ -37,6 +37,7 @@ const Select = styled.select`
   margin-right: 20px;
   ${mobile({ margin: "10px 0px" })}
 `;
+
 const Option = styled.option``;
 
 const ProductList = ({themeToggler,theme}) => {
@@ -48,13 +49,6 @@ const ProductList = ({themeToggler,theme}) => {
   const [sort, setSort] = useState("newest");
   console.log(cat)
 
-  const handleFilters = (e) => {
-    const value = e.target.value;
-    setFilters({
-      ...filters,
-      [e.target.name]: value,
-    });
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);

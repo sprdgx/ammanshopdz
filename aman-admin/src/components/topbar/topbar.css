@@ -18,7 +18,7 @@
 .logo {
   font-weight: bold;
   font-size: 1.3rem;
-  color: darkblue;
+  color: teal;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -61,6 +61,13 @@
   cursor: pointer;
 }
 
+.topLogo {
+  width: 55px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 .menuIcon {
   position: relative;
   top: 4px;
@@ -77,4 +84,61 @@
   .topRight div {
     display: none;
   }
+}
+
+
+
+.fade-enter {
+  opacity: 0;
+}
+
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+}
+
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+.text {
+  background-color: #eee;
+  border: none;
+  padding: 0.8rem;
+  font-size: 0.8rem;
+  width: 8em;
+  height: 3em;
+  border-radius: 1rem;
+  color: rgb(0, 128, 122);
+  box-shadow: 0 0.4rem #dfd9d9;
+  cursor: pointer;
+  margin-bottom: 20px;
+ }
+ 
+ .text:active {
+  color: white;
+  box-shadow: 0 0.2rem #dfd9d9;
+  transform: translateY(0.2rem);
+ }
+ 
+ .text:hover:not(:disabled) {
+  background: rgb(0, 128, 122);
+  color: white;
+  text-shadow: 0 0.1rem #bcb4b4;
+ }
+ 
+ .text:disabled {
+  cursor: auto;
+  color: grey;
+ }
+
+.text:hover:before {
+  transform: translateX(15em);
 }

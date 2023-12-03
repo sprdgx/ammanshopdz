@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Product from "./Product";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BASE_URL } from "../requestMethods";
+import {BASE_URL} from '../requestMethods'
 import { mobile } from "../responsive";
 
 const Container = styled.div`
@@ -30,7 +30,9 @@ const Container = styled.div`
   }
 `;
 
+
 const Products = ({ cat, filters, sort }) => {
+
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -38,7 +40,9 @@ const Products = ({ cat, filters, sort }) => {
     const getProducts = async () => {
       try {
         const res = await axios.get(
-          cat ? `${BASE_URL}products?category=${cat}` : `${BASE_URL}products`
+          cat
+            ? `${BASE_URL}products?category=${cat}`
+            : `${BASE_URL}products`
         );
         setProducts(res.data);
       } catch (err) {}

@@ -1,4 +1,6 @@
-import { ShoppingCartOutlined } from "@material-ui/icons";
+import {
+  ShoppingCartOutlined,
+} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -61,12 +63,12 @@ const Product = ({ item }) => {
   return (
     <Container>
       <Link to={`/product/${item._id}`}>
-        <Image src={item.img} height={300} width={300} />
-        <Info>
-          <Icon>
-            <ShoppingCartOutlined style={{ color: "teal" }} />
-          </Icon>
-        </Info>
+      <Image src={item.img} height={300} width={300} />
+      <Info>
+        <Icon>
+          <ShoppingCartOutlined style={{ color: 'teal' }}  />
+        </Icon>
+      </Info>
       </Link>
     </Container>
   );

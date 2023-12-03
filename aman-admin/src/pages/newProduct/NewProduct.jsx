@@ -2,8 +2,13 @@ import { useState } from "react";
 import "./newProduct.css";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import FileBase64 from 'react-file-base64';
+import { useNavigate } from 'react-router-dom';
 
 export default function NewProduct() {
+
+
+
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
@@ -11,19 +16,35 @@ export default function NewProduct() {
   const [img, setImg] = useState("");
   const [categories, setCat] = useState([]);
   const [details, setDetails] = useState([]);
-  const [detailInput, setDetailInput] = useState("");
+  const [not, setNot] = useState(null);
   const [titleInput, setTitleInput] = useState('');
-  const [descriptionInput, setDescriptionInput] = useState('');
+  
+  
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
 
   const handleClick = (e) => {
+    try {
     e.preventDefault();
     addProduct(dispatch, { title, desc, price,  inStock: parseInt(inStock), img, categories,  detail: details });
+    setNot('Product Added successfully');
+    setTimeout(() => {
+      setNot(null);
+      navigate('/products');
+    }, 3000); 
+  } catch (error) {
+    console.error("Error deleting order:", error);
+  }
   };
 
-  const handleImgChange = (e) => {
-    setImg(e.target.value);
+
+
+  const handleImgChange = (file) => { // Modify handleImgChange function
+    setImg(file.base64); // Set base64 data to state
   };
+
 
   const addDetail = () => {
     const separatorIndex = titleInput.indexOf(':'); // Find the separator ":"
@@ -50,13 +71,18 @@ export default function NewProduct() {
 
   return (
     <div className="newProduct">
+      {not && (
+        <div className="customNotification">
+          {not}
+        </div>
+      )}
       <h1 className="addProductTitle">New Product</h1>
       <form className="addProductForm">
         <div className="addProductItem">
           <label>Image</label>
-          <input
-            type="text"
-            onChange={handleImgChange} 
+          <FileBase64
+            multiple={false}
+            onDone={handleImgChange}
           />
           {img && <img src={img} alt="Product" style={{ maxWidth: "100px", maxHeight: "100px" }} />}
         </div>

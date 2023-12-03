@@ -2,26 +2,38 @@ import { useState } from "react";
 import { placeOrder } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import "./checkorder.css";
+import styled from "styled-components";
 import CloseIcon from '@material-ui/icons/Close'
 import PersonIcon from '@material-ui/icons/Person';
 import PhoneIcon from '@material-ui/icons/Phone';
 import RoomIcon from '@material-ui/icons/Room';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
+
+
+const Notification = styled.div`
+position: fixed;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+background-color: #333;
+color: #fff;
+padding: 10px 20px;
+border-radius: 5px;
+animation: slideIn 0.5s ease-out forwards, fadeOut 0.5s ease-in 2.5s forwards;
+`;
 
 const Popup = ({ setIsOpenPopup }) => {
   const [clientName, setClientName] = useState("");
   const [clientNumber, setClientNumber] = useState("");
   const [clientAddress, setClientAddress] = useState("");
+  const [not, setNot] = useState(null);
 
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
     e.preventDefault();
-  
-    // Calculate the total price based on the quantity and individual product prices
     const totalPrice = cart.products.reduce((total, product) => {
       return total + product.quantity * product.price;
     }, 0);
@@ -37,57 +49,58 @@ const Popup = ({ setIsOpenPopup }) => {
         image: product.img,
       })),
     });
+    setNot('La commande est passée.😊');
+    setTimeout(() => {
+      setNot(null);
+    }, 3000); 
   };
 
   function renderCheckoutOrFillCart() {
     if (!cart.products || cart.products.length > 0) {
       return (
-          <form class="form">
-              <TextField
-                placeholder="Votre nom complet"
-                onChange={(e) => setClientName(e.target.value)}
-                className="input-1"
-                type="text"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PersonIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                placeholder="Ton Numéro de téléphone"
-                onChange={(e) => setClientNumber(e.target.value)}
-                className="input-1"
-                type="text"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <PhoneIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                placeholder="Votre Adresse"
-                onChange={(e) => setClientAddress(e.target.value)}
-                className="input-1"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <RoomIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <button variant="contained" color="primary" className="button-1" onClick={handleClick}>
-                Passer la commande
-              </button>
+      <form class="form">
+            <TextField
+              placeholder="Votre nom complet"
+              onChange={(e) => setClientName(e.target.value)}
+              className="input-1"
+              type="text"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PersonIcon />
+                  </InputAdornment>
+                ),
+              }} />
+            <TextField
+              placeholder="Ton Numéro de téléphone"
+              onChange={(e) => setClientNumber(e.target.value)}
+              className="input-1"
+              type="text"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PhoneIcon />
+                  </InputAdornment>
+                ),
+              }} />
+            <TextField
+              placeholder="Votre Adresse"
+              onChange={(e) => setClientAddress(e.target.value)}
+              className="input-1"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <RoomIcon />
+                  </InputAdornment>
+                ),
+              }} />
+            <button variant="contained" color="primary" className="button-1" onClick={handleClick}>
+              Passer la commande
+            </button>
           </form>
       );
     } else {
-      return <div class='empty'>Panier vide📭, Veuillez remplir le😊.</div>;
+      return <div class='empty'>Panier vide📭, Merci d'être ici😊.</div>;
     }
   }
 
@@ -128,6 +141,9 @@ const Popup = ({ setIsOpenPopup }) => {
           }}
         >
           <CloseIcon style={{ color: 'red', fontWeight: 'bold', fontSize: '30px' }} />
+        <Notification className="customNotification">
+          {not}
+        </Notification>
         </div>
       </div>
     </div>

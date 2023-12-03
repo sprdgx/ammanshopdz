@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useDispatch} from "react-redux";
 import { updateProduct } from "../../redux/apiCalls";
 import './product.css'
+import { useNavigate } from 'react-router-dom';
+import FileBase64 from 'react-file-base64';
+
 
 export default function Product() {
   const location = useLocation();
@@ -13,15 +16,29 @@ export default function Product() {
   const [price, setPrice] = useState("");
   const [inStock, setStock] = useState("");
   const [img, setImg] = useState("");
+  const [not, setNot] = useState(null);
+
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = (e) => {
+    try {
     e.preventDefault();
-    updateProduct(productId, dispatch, { title, desc, price, inStock, img });
+    updateProduct(productId, dispatch, { title, desc, price, inStock: parseInt(inStock), img });
+    setNot('Product Edited successfully');
+    setTimeout(() => {
+      setNot(null);
+      navigate('/products');
+    }, 3000); 
+    } catch (error) {
+      console.error("Error deleting order:", error);
+    }
   };
 
-  const handleImgChange = (e) => {
-    setImg(e.target.value);
+
+  const handleImgChange = (file) => { // Modify handleImgChange function
+    setImg(file.base64); // Set base64 data to state
   };
 
   const product = useSelector((state) =>
@@ -30,11 +47,13 @@ export default function Product() {
 
   return (
     <div className="product">
+      {not && (
+        <div className="customNotification">
+          {not}
+        </div>
+      )}
       <div className="productTitleContainer">
         <h1 className="productTitle">Product</h1>
-        <Link to="/newproduct">
-          <button className="productAddButton">Create</button>
-        </Link>
       </div>
       <div className="productTop">
         <div className="productTopRight">
@@ -59,18 +78,21 @@ export default function Product() {
             <input type="text" placeholder={product.desc} onChange={(e) => setDesc(e.target.value)} />
             <label>Price</label>
             <input type="text" placeholder={product.price} onChange={(e) => setPrice(e.target.value)} />
-            <label>In Stock</label>
-            <select name="inStock" onChange={(e) => setStock(e.target.value)}>
-              <option value="true">YES</option>
-              <option value="false">NO</option>
-            </select>
+            <label>Stock</label>
+            <input
+            name="inStock"
+            type="number"
+            placeholder={product.inStock}
+            value={inStock}
+            onChange={(e) => setStock(e.target.value)}
+          />
           </div>
           <div className="productFormRight">
             <div className="productUpload">
               {img && <img src={img} alt="Product" className="productUploadImg" />}
-              <input
-                type="text"
-                onChange={handleImgChange} 
+              <FileBase64
+               multiple={false}
+               onDone={handleImgChange}
               />
             </div>
             </div>

@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 const Container = styled.div`
   width: 97%;
   height: 80vh;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
+  margin-top: 20px;
   display: flex;
   position: relative;
   overflow: hidden;
@@ -90,7 +91,6 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 10px;
 `;
-
 const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
   const handleClick = (direction) => {

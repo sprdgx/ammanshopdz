@@ -18,16 +18,6 @@
   margin-right: 10px;
 }
 
-.productListEdit {
-  border: none;
-  border-radius: 10px;
-  padding: 5px 10px;
-  background-color: #3bb077;
-  color: white;
-  cursor: pointer;
-  margin-right: 20px;
-}
-
 .productListDelete {
   color: red;
   cursor: pointer;
@@ -38,4 +28,109 @@
     padding: 0;
     margin-top: 50px;
   }
+}
+
+
+.productListedit {
+  background-color: #eee;
+  border: none;
+  padding: 0.5rem;
+  font-size: 0.65rem;
+  width: 8.5em;
+  height: 3em;
+  border-radius: 1rem;
+  color: rgb(0, 128, 122);
+  box-shadow: 0 0.4rem #dfd9d9;
+  cursor: pointer;
+ }
+ 
+ .productListedit:active {
+  color: white;
+  box-shadow: 0 0.2rem #dfd9d9;
+  transform: translateY(0.2rem);
+ }
+ 
+ .productListedit:hover:not(:disabled) {
+  background: rgb(0, 128, 122);
+  color: white;
+  text-shadow: 0 0.1rem #bcb4b4;
+ }
+ 
+ .productListedit:disabled {
+  cursor: auto;
+  color: grey;
+ }
+
+.productListedit:hover:before {
+  transform: translateX(15em);
+}
+
+.deletedbutton {
+  background-color: #eee;
+  border: none;
+  padding: 0.5rem;
+  font-size: 0.65rem;
+  width: 8.5em;
+  height: 3em;
+  border-radius: 1rem;
+  color: lightcoral;
+  box-shadow: 0 0.4rem #dfd9d9;
+  cursor: pointer;
+  margin-left: 5px;
+ }
+ 
+ .deletedbutton:active {
+  color: white;
+  box-shadow: 0 0.2rem #dfd9d9;
+  transform: translateY(0.2rem);
+ }
+ 
+ .deletedbutton:hover:not(:disabled) {
+  background: lightcoral;
+  color: white;
+  text-shadow: 0 0.1rem #bcb4b4;
+ }
+ 
+ .deletedbutton:disabled {
+  cursor: auto;
+  color: grey;
+ }
+
+.deletedbutton:hover:before {
+  transform: translateX(15em);
+}
+
+.productAddButtonn {
+  background-color: #eee;
+  border: none;
+  padding: 0.5rem;
+  font-size: 0.65rem;
+  width: 8.5em;
+  height: 3em;
+  border-radius: 1rem;
+  color: rgb(0, 128, 122);
+  box-shadow: 0 0.4rem #dfd9d9;
+  cursor: pointer;
+  margin-bottom: 20px;
+ }
+ 
+ .productAddButtonn:active {
+  color: white;
+  box-shadow: 0 0.2rem #dfd9d9;
+  transform: translateY(0.2rem);
+ }
+ 
+ .productAddButtonn:hover:not(:disabled) {
+  background: rgb(0, 128, 122);
+  color: white;
+  text-shadow: 0 0.1rem #bcb4b4;
+ }
+ 
+ .productAddButtonn:disabled {
+  cursor: auto;
+  color: grey;
+ }
+
+.productAddButtonn:hover:before {
+  transform: translateX(15em);
 }

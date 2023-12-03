@@ -8,6 +8,7 @@ import { mobile } from "../responsive";
 import CheckOrder from "../components/CheckOrder";
 import { increaseProductQuantity , decreaseProductQuantity} from "../redux/cartRedux";
 import { useEffect, useState } from "react";
+
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -31,6 +32,7 @@ const TopButton = styled.button`
   padding: 10px;
   font-weight: 600;
   cursor: pointer;
+  border-radius: 10px;
   border: ${(props) => props.type === "filled" && "none"};
   background-color: ${(props) =>
     props.type === "filled" ? "black" : "transparent"};
@@ -128,19 +130,33 @@ const SummaryTitle = styled.h1`
 `;
 
 const SummaryItem = styled.div`
-  margin: 30px 0px;
+  margin: 25px 0px;
   display: flex;
   justify-content: space-between;
   font-weight: ${(props) => props.type === "total" && "500"};
   font-size: ${(props) => props.type === "total" && "24px"};
 `;
 
+
+const WilayaSelection = styled.select`
+  padding: 10px;
+`;
+
 const SummaryItemText = styled.span``;
 
 const SummaryItemPrice = styled.span``;
 
+const ShippingPrices = {
+  Alger: 500,
+  TiziOuzou:600, 
+  Oran: 800,
+
+};
+
 
 const Cart = ({themeToggler,theme}) => {
+
+  const [selectedWilaya, setSelectedWilaya] = useState('Alger');
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
@@ -159,12 +175,12 @@ const Cart = ({themeToggler,theme}) => {
 
   const [isOpenPopup, setIsOpenPopup] = useState(false);
 
+
     return (
     <Container>
       <Navbar themeToggler={themeToggler} theme={theme} />
-      <Announcement />
       <Wrapper>
-        <Title>YOUR BAG</Title>
+        <Title>Votre Achats</Title>
         <Top>
         </Top>
         <Bottom>
@@ -201,22 +217,28 @@ const Cart = ({themeToggler,theme}) => {
             <Hr />
           </Info>
           <Summary>
-            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+            <SummaryTitle>Votre Cammandes</SummaryTitle>
             <SummaryItem>
-              <SummaryItemText>Subtotal</SummaryItemText>
+              <SummaryItemText>Le Subtotal</SummaryItemText>
               <SummaryItemPrice>{cart.total} DA</SummaryItemPrice>
             </SummaryItem>
+            <WilayaSelection
+            value={selectedWilaya}
+            onChange={(e) => setSelectedWilaya(e.target.value)}
+            >
+            <option value="Alger">Alger</option>
+            <option value="TiziOuzou">Tizi Ouzou</option>
+            <option value="Oran">Oran</option>
+            </WilayaSelection>
             <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice> 400DA</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>-400DA</SummaryItemPrice>
+            <SummaryItemText>{`Expédition vers ${selectedWilaya}`}</SummaryItemText>
+            <SummaryItemPrice>{ShippingPrices[selectedWilaya]} DA</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice> {cart.total} DA</SummaryItemPrice>
+              <SummaryItemPrice>
+                {cart.total + ShippingPrices[selectedWilaya]} DA
+              </SummaryItemPrice>
             </SummaryItem>
             <TopButton onClick={setIsOpenPopup.bind(this, true)} type="filled">FINALISER L'ACHAT</TopButton>
             {isOpenPopup && <CheckOrder setIsOpenPopup={setIsOpenPopup} />}

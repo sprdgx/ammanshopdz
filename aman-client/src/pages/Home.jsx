@@ -8,27 +8,28 @@ import Slider from "../components/Slider";
 import Map from "../components/Map";
 import styled from "styled-components";
 
+
 const HomeContainer = styled.div`
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
 `;
 
-const Home = ({ themeToggler, theme }) => {
+const Home = ({themeToggler, theme}) => {
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <HomeContainer>
-      <Navbar themeToggler={themeToggler} theme={theme} />
-      <Announcement />
+      <HomeContainer>
+      <Navbar themeToggler={themeToggler} theme={theme}  />
       <Slider />
       <Categories />
-      <Products />
-      <Footer />
-      <Map />
-    </HomeContainer>
+      <Products/>
+      <Footer/>
+      <Map/>
+      </HomeContainer>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Description, Remove } from "@material-ui/icons";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -40,49 +40,49 @@ const Title = styled.h1`
   font-weight: 200;
 `;
 
-const Desc = styled.p`
+const Desc = styled.div`
   margin: 20px 0px;
+  margin-bottom: 10%;
 `;
+
+const Desscc = styled.p`
+  margin: 20px 0px;
+  margin-bottom: 10%;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+`;
+
+const DetailList = styled.ul`
+  padding-left: 20px;
+`;
+
+const DetailTitle = styled.li`
+  font-weight: bold;
+  margin-bottom: 8px;
+  &:before {
+    content: "•";
+    color: teal;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+  }
+`;
+
 
 const Price = styled.span`
   font-weight: 100;
   font-size: 40px;
-`;
+  margin-top:20px;`;
 
-const FilterContainer = styled.div`
-  width: 50%;
-  margin: 30px 0px;
-  display: flex;
-  justify-content: space-between;
-  ${mobile({ width: "100%" })}
-`;
-
-const Filter = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const FilterColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  margin: 0px 5px;
-  cursor: pointer;
-`;
-
-const FilterSize = styled.select`
-  margin-left: 10px;
-  padding: 5px;
-`;
-
-const FilterSizeOption = styled.option``;
 
 const AddContainer = styled.div`
   width: 50%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top:100px;
   ${mobile({ width: "100%" })}
 `;
 
@@ -109,10 +109,23 @@ const Button = styled.button`
   background-color: white;
   cursor: pointer;
   font-weight: 500;
+  border-radius: 20px;
 
   &:hover {
     background-color: #f8f4f4;
   }
+`;
+
+const Notification = styled.div`
+position: fixed;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+background-color: #333;
+color: #fff;
+padding: 10px 20px;
+border-radius: 5px;
+animation: slideIn 0.5s ease-out forwards, fadeOut 0.5s ease-in 2.5s forwards;
 `;
 
 const Product = ({themeToggler,theme}) => {
@@ -122,6 +135,7 @@ const Product = ({themeToggler,theme}) => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
+  const [not, setNot] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -148,6 +162,10 @@ const Product = ({themeToggler,theme}) => {
     dispatch(
       addProduct({ ...product, quantity, color, size })
     );
+    setNot('Ajouté avec succès.');
+    setTimeout(() => {
+      setNot(null);
+    }, 3000); 
   };
 
   useEffect(() => {
@@ -156,50 +174,33 @@ const Product = ({themeToggler,theme}) => {
 
   return (
     <Container>
+      {not && (
+        <Notification className="customNotification">
+          {not}
+        </Notification>
+      )}
       <Navbar themeToggler={themeToggler} theme={theme} />
-      <Announcement />
       <Wrapper>
         <ImgContainer>
           <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
           <Title>{product.title}</Title>
-          <Desc>{product.desc}</Desc>
-          {product.detail && (
-            <div>
-              <ul>
-                {product.detail.map((detail, index) => (
-                  <li key={index}>{detail}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          <Price>{product.price} DA </Price>
-          <FilterContainer>
-          {product.color && (
-            <FilterContainer>
-              <Filter>
-                {product.color?.map((c) => (
-                  <FilterColor
-                    color={c}
-                    key={c}
-                    onClick={() => setColor(c)}
-                  />
-                ))}
-              </Filter>
-            </FilterContainer>
-          )}
-            {product.size ? 
-             (null) : (
-            <Filter>
-              <FilterSize onChange={(e) => setSize(e.target.value)}>
-                {product.size?.map((s) => (
-                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
-                ))}
-              </FilterSize>
-            </Filter>)
-          }
-          </FilterContainer>
+          <Desc>
+            <Desscc>
+              {product.desc}
+            </Desscc>
+              {product.detail && (         
+            <DetailList>
+              {product.detail.map((detail, index) => (
+                <DetailTitle key={index}>{detail}</DetailTitle>
+              ))}
+            </DetailList>         
+            )}
+          </Desc>
+          <Price>
+            {product.price} DA 
+          </Price>
           <AddContainer>
             <AmountContainer>
               <Remove onClick={() => handleQuantity("dec")} />

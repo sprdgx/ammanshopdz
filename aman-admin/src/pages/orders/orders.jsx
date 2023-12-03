@@ -121,7 +121,7 @@ export default function Orders() {
               <>
               <span className="confirmed">Confirmed</span>
               <button
-                className="deleteButton"
+                className="deletedbutton"
                 onClick={() => handleDeleteOrder(params.row._id)}
               >
                 Delete Order
@@ -137,7 +137,7 @@ export default function Orders() {
                   Confirm Order
                 </button>
                 <button
-                className="deleteButton"
+                className="deletedbutton"
                 onClick={() => handleDeleteOrder(params.row._id)}
                 >
                 Delete Order

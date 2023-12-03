@@ -1,12 +1,22 @@
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
+import Login from '../login/Login'
 import './productList.css'
 
 export default function ProductList() {
+
+  const localStorageData = localStorage.getItem("persist:root");
+  const userData = localStorageData ? JSON.parse(JSON.parse(localStorageData).user) : null;
+
+  const isAdmin = userData?.currentUser?.isAdmin;
+
+  const [not, setNot] = useState(null);
+
+
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
 
@@ -15,7 +25,15 @@ export default function ProductList() {
   }, [dispatch]);
 
   const handleDelete = (id) => {
+    try {
     deleteProduct(id, dispatch);
+    setNot('Product successfully Deleted');
+    setTimeout(() => {
+      setNot(null);
+    }, 3000); 
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
   };
 
   const columns = [
@@ -47,17 +65,19 @@ export default function ProductList() {
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 250,
       renderCell: (params) => {
         return (
           <>
             <Link to={"/product/" + params.row._id}>
-              <button className="productListEdit">Edit</button>
+              <button className="productListedit">Edit</button>
             </Link>
-            <DeleteOutlineIcon
-              className="productListDelete"
-              onClick={() => handleDelete(params.row._id)}
-            />
+            <button
+                className="deletedbutton"
+                onClick={() => handleDelete(params.row._id)}
+              >
+                Delete Order
+            </button>
           </>
         );
       },
@@ -66,22 +86,33 @@ export default function ProductList() {
 
   return (
     <div className="productList">
-      <Link to="/newproduct">
-        <button className="productAddButton">Create</button>
-      </Link>
-      <DataGrid
-        rows={products}
-        disableSelectionOnClick
-        columns={columns}
-        getRowId={(row) => row._id}
-        pageSize={8}
-        checkboxSelection
-        sx={{
-          width: "100%",
-          height: "100%",
-          overflow: "hidden",
-        }}
-      />
+      {isAdmin ? (
+        <>
+          {not && (
+            <div className="customNotification">
+              {not}
+            </div>
+          )}
+          <Link to="/newproduct">
+            <button className="productAddButtonn">Create</button>
+          </Link>
+          <DataGrid
+            rows={products}
+            disableSelectionOnClick
+            columns={columns}
+            getRowId={(row) => row._id}
+            pageSize={8}
+            checkboxSelection
+            sx={{
+              width: "100%",
+              height: "100%",
+              overflow: "hidden",
+            }}
+          />
+        </>
+      ) : (
+        <Login/>
+      )}
     </div>
   );
 }
