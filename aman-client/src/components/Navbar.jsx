@@ -25,11 +25,14 @@ const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  padding-left:20px;
+  ${mobile({ paddingLeft:'15%' })}
 `;
 
 const Center = styled.div`
   flex: 1;
   text-align: center;
+  ${mobile({ display: "none" })}
 `;
 
 const Logo = styled.h1`

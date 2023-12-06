@@ -8,7 +8,7 @@ import LazyLoad from 'react-lazyload';
 
 const Container = styled.div`
   width: 97%;
-  height: 80vh;
+  height: 80%;
   margin-bottom: 50px;
   margin-top: 20px;
   display: flex;
@@ -16,7 +16,12 @@ const Container = styled.div`
   overflow: hidden;
   border-radius: 20px;
   margin-left: 20px;
-  ${mobile({ height: "300px", width: "89%" })}
+
+  ${mobile({ 
+    height: "300px", 
+    width: "89%",
+    minHeight: "300px",
+  })}
 `;
 
 const Arrow = styled.div`
@@ -51,18 +56,18 @@ const Slide = styled.div`
   display: flex;
   align-items: center;
   background-color: teal;
-  ${mobile({ height: "100%", width: "35vh" })}
+  ${mobile({ height: "100%", width: "55vh" })}
 `;
 
 const ImgContainer = styled.div`
-  width: 700px;
-  flex: 1;
-  ${mobile({})}
+  width: 40%; 
+  height: 100%; 
 `;
 
 const Image = styled.img`
-  height: 650px;
-  width: 650px;
+  width: 100%;
+  height: 505px;
+  object-fit: cover;
   ${mobile({ width: "600px", height:'400px' })}
 `;
 

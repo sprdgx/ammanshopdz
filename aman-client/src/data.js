@@ -1,7 +1,7 @@
 export const sliderItems = [
     {
       id: 1,
-      img: "https://raw.githubusercontent.com/sprdgx/ammanshop-pictures/main/electromenager.jpg?token=GHSAT0AAAAAACIGBO72LAMZ2JDQ6ZN4ZSGGZKBSYQQ",
+      img: "https://www.maison-connectee.eu/wp-content/uploads/2020/07/shutterstock_1081332008-1000x580.jpg",
       title: "Electro-menager",
       desc: "Achetez vos électroménagers ici pour une maison moderne et fonctionnelle!",
       bg: "f5fafd",
@@ -9,7 +9,7 @@ export const sliderItems = [
     },
     {
       id: 2,
-      img: "https://www.dpreview.com/files/p/articles/2148903295/Razer_Blade_14__2021__Gaming_-_3_Alt.jpeg",
+      img: "https://themvp.in/catalog/view/assets/img/PC-Shravan-Kumar.webp",
       title: "Informatique",
       desc: "Trouvez ici tout ce dont vous avez besoin en informatique pour des équipements performants et innovants!S.",
       bg: "fcf1ed",
