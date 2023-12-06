@@ -1,16 +1,6 @@
-import { loginFailure, loginStart, loginSuccess } from "./userRedux";
-import { publicRequest, userRequest } from "../requestMethods";
-import {
-  getProductFailure,
-  getProductStart,
-  getProductSuccess,
-  deleteProductFailure,
-  deleteProductStart,
-  deleteProductSuccess,
-  updateProductSuccess,
-  addProductFailure,
-  addProductSuccess,
-} from "./productRedux";
+import { loginFailure, loginStart, loginSuccess, registerSuccess } from "./userRedux";
+import { orderPlaced } from "./cartRedux";
+import { publicRequest } from "../requestMethods";
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
@@ -22,59 +12,20 @@ export const login = async (dispatch, user) => {
   }
 };
 
-export const getProducts = async (dispatch) => {
-  dispatch(getProductStart());
+export const register =async (dispatch, registerUser) => {
   try {
-    const res = await publicRequest.get("/products");
-    dispatch(getProductSuccess(res.data));
-  } catch (err) {
-    dispatch(getProductFailure());
+    const response = await publicRequest.post("/auth/register", registerUser);
+    dispatch(registerSuccess(response.data));
+  } catch (error) {
+    console.error("Error placing the order:", error);
   }
 };
 
-export const getOrders = async (dispatch) => {
-  dispatch(getProductStart());
+export const placeOrder =async (dispatch, orderData) => {
   try {
-    const res = await publicRequest.get("/orders");
-    dispatch(getProductSuccess(res.data));
-  } catch (err) {
-    dispatch(getProductFailure());
-  }
-};
-
-export const deleteProduct = async (id, dispatch) => {
-  dispatch(deleteProductStart());
-  try {
-     const res = await userRequest.delete(`/products/${id}`);
-    dispatch(deleteProductSuccess(id, res.data));
-  } catch (err) {
-    dispatch(deleteProductFailure());
-  }
-  
-};
-
-export const updateProduct = async (productId, dispatch, updatedData) => {
-  try {
-    const filteredData = {};
-    for (const key in updatedData) {
-      if (updatedData[key] !== "") {
-        filteredData[key] = updatedData[key];
-      }
-    }
-    
-    const res = await userRequest.put(`/products/${productId}`, filteredData);
-    dispatch(updateProductSuccess(res.data));
-  } catch (err) {
-    console.error("Error updating product:", err);
-  }
-};
-
-export const addProduct = async (dispatch, product) => {
-  try {
-    const res = await userRequest.post("/products", product);
-    dispatch(addProductSuccess(res.data));
-  } catch (err) {
-    console.error("Error adding product:", err);
-    dispatch(addProductFailure());
+    const response = await publicRequest.post("/orders/placeorder", orderData);
+    dispatch(orderPlaced(response.data));
+  } catch (error) {
+    console.error("Error placing the order:", error);
   }
 };
