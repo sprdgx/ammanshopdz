@@ -34,8 +34,6 @@ export default function Orders() {
         console.error("Error fetching orders:", error);
       }
     };
-
-    // Call the function to fetch orders
     getOrders(dispatch);
   }, [dispatch]);
 
@@ -68,7 +66,7 @@ export default function Orders() {
               {params.row.products.map((product, index) => (
                 <div key={index} className="productBlock">
                   <img
-                    className="productListImg"
+                    className="productListimg"
                     src={product.image}
                     height={60}
                     width={60}

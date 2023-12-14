@@ -44,7 +44,7 @@ const Arrow = styled.div`
 `;
 
 const Wrapper = styled.div`
-  height: 100%;
+  height: 90%;
   display: flex;
   transition: all 1.5s ease;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
@@ -68,12 +68,55 @@ const Image = styled.img`
   width: 100%;
   height: 505px;
   object-fit: cover;
-  ${mobile({ width: "600px", height:'400px' })}
+  ${mobile({ width: "320px", height:'300px', margin:'0px 5px', display:'none', })}
+`;
+
+const Image1 = styled.img`
+  width: 100%;
+  height: 505px;
+  object-fit: cover;
+  display: block;
+  float: left;
+
+  ${mobile({ 
+    width: "430px", 
+    height: '300px',
+  })}
+`;
+
+const Image2 = styled.img`
+  width: 100%;
+  height: 505px;
+  object-fit: cover;
+  display: block;
+  float: left;
+
+
+  ${mobile({ 
+    width: "430px", 
+    height: '300px',
+    marginLeft: '-100px', // Reset margin for mobile view if needed
+  })}
+`;
+
+const Image3 = styled.img`
+  width: 100%;
+  height: 505px;
+  object-fit: cover;
+  display: block;
+  float: left;
+
+
+  ${mobile({ 
+    width: "430px", 
+    height: '300px',
+    marginLeft: '-190px', // Reset margin for mobile view if needed
+  })}
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
-  padding: 50px;
+  padding: 30px;
   margin-top: -80px;
   ${mobile({ display: "none" })}
 `;
@@ -82,11 +125,69 @@ const Title = styled.h1`
   font-size: 70px;
 `;
 
+const Electromenager = styled.h1`
+  font-size: 30px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  z-index: 1;
+  display: none;
+  text-align: center; /* Center the text */
+
+  ${mobile({
+    display: "block",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    padding: "10px",
+    borderRadius: "20px",
+    textAlign: "center", // Center text for mobile view
+  })}
+`;
+
+const Informatique = styled.h1`
+  font-size: 30px;
+  position: absolute;
+  top: 10px;
+  left: 40%;
+  transform: translateX(-50%);
+  color: white;
+  z-index: 1;
+  display: none;
+
+  ${mobile({
+    display: "block",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    padding: "10px",
+    borderRadius: "20px",
+  })}
+`;
+
+const Livres = styled.h1`
+  font-size: 30px;
+  position: absolute;
+  bottom: 10px;
+  right: 350px;
+  color: white;
+  z-index: 1;
+  display: none;
+  text-align: center; /* Center the text */
+
+  ${mobile({
+    display: "block",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    padding: "10px",
+    borderRadius: "20px",
+    textAlign: "center", // Center text for mobile view
+  })}
+`;
+
+
 const Desc = styled.p`
   margin: 50px 0px;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
+  ${mobile({ display: "none" })}
 `;
 
 const Button = styled.button`
@@ -95,6 +196,7 @@ const Button = styled.button`
   background-color: transparent;
   cursor: pointer;
   border-radius: 10px;
+  ${mobile({ display: "none" })}
 `;
 const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -112,11 +214,35 @@ const Slider = () => {
         <ArrowLeftOutlined />
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
-        {sliderItems.map((item) => (
+        {sliderItems.map((item, index) => (
           <Slide bg={item.bg} key={item.id}>
             <ImgContainer>
               <LazyLoad height={700}>
                 <Image src={item.img} />
+                {index === 0 && 
+                <>
+                  <Image1 src={item.img} />
+                  <Electromenager>
+                    Electromenager
+                  </Electromenager>
+                </>
+                }
+                {index === 1 && 
+                <>
+                  <Image2 src={item.img} />
+                  <Informatique>
+                    Informatique
+                  </Informatique>
+                </>
+                }
+                {index === 2 && 
+                <>
+                  <Image3 src={item.img} />
+                  <Livres>
+                    Livres
+                  </Livres>
+                </>
+                }
               </LazyLoad>
             </ImgContainer>
             <InfoContainer>

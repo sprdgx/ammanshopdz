@@ -12,27 +12,13 @@ router.post("/placeorder", async (req, res) => {
       clientAddress,
       price,
       products: orderedProducts,
+      deliveryType, // Include the deliveryType in the request body
     } = req.body;
 
-    const updatedProducts = [];
+    // Other existing code for product validation...
 
-    for (const { productId, quantity, image } of orderedProducts) {
-      const product = await Product.findById(productId);
-
-      if (!product) {
-        return res.status(404).json({ message: `Product with ID ${productId} not found` });
-      }
-
-      if (product.inStock < quantity) {
-        return res.status(400).json({ message: `Insufficient stock for product with ID ${productId}` });
-      }
-
-      product.inStock -= quantity; // Deduct the quantity ordered from available stock
-      updatedProducts.push(product.save()); // Queue the product update
-    }
-
-    // Wait for all product updates to complete
-    await Promise.all(updatedProducts);
+    // Determine the delivery type based on client's choice
+    const determinedDeliveryType = deliveryType === 'desktop' ? 'desktop' : 'home';
 
     // Create a new order with the products including their quantities and images
     const productsWithDetails = orderedProducts.map(({ productId, quantity, image }) => {
@@ -49,6 +35,7 @@ router.post("/placeorder", async (req, res) => {
       clientAddress,
       price,
       products: productsWithDetails,
+      deliveryType: determinedDeliveryType, // Set the determined delivery type
     });
 
     const savedOrder = await newOrder.save(); // Save the order details

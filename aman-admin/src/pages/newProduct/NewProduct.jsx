@@ -4,6 +4,9 @@ import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
 import FileBase64 from 'react-file-base64';
 import { useNavigate } from 'react-router-dom';
+import imageCompression from 'browser-image-compression'; 
+
+
 
 export default function NewProduct() {
 
@@ -32,7 +35,7 @@ export default function NewProduct() {
     setNot('Product Added successfully');
     setTimeout(() => {
       setNot(null);
-      navigate('/products');
+      navigate('/');
     }, 3000); 
   } catch (error) {
     console.error("Error deleting order:", error);
@@ -41,13 +44,31 @@ export default function NewProduct() {
 
 
 
-  const handleImgChange = (file) => { // Modify handleImgChange function
-    setImg(file.base64); // Set base64 data to state
+  const handleImgChange = async (file) => {
+    try {
+      const options = {
+        maxSizeMB: 0.5, 
+        maxWidthOrHeight: 800,
+        useWebWorker: true,
+        quality: 0.8, 
+
+      };
+      
+      const compressedFile = await imageCompression(file.file, options);
+  
+      const reader = new FileReader();
+      reader.readAsDataURL(compressedFile);
+      reader.onloadend = () => {
+        setImg(reader.result);
+      };
+    } catch (error) {
+      console.error("Error compressing image:", error);
+    }
   };
 
 
   const addDetail = () => {
-    const separatorIndex = titleInput.indexOf(':'); // Find the separator ":"
+    const separatorIndex = titleInput.indexOf(':');
   
     if (separatorIndex !== -1) {
       const title = titleInput.substring(0, separatorIndex).trim();
@@ -55,8 +76,8 @@ export default function NewProduct() {
   
       if (title !== '' && description !== '') {
         const newDetail = `${title}: ${description}`;
-        setDetails([...details, newDetail]); // Add new detail to the array
-        setTitleInput(''); // Clear the input field after adding
+        setDetails([...details, newDetail]);
+        setTitleInput('');
       }
     }
   };
@@ -64,8 +85,6 @@ export default function NewProduct() {
   
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
-  
-    // Display the input as is without parsing
     setTitleInput(inputValue);
   };
 
@@ -132,7 +151,12 @@ export default function NewProduct() {
         </div>
         <div className="addProductItem">
           <label>Categories</label>
-          <input type="text" placeholder="jeans,skirts" onChange={(e) => setCat(e.target.value)} />
+          <select onChange={(e) => setCat(e.target.value)}>
+            <option value="">Select category...</option>
+            <option value="Electromenager">Electromenager</option>
+            <option value="Informatique">Informatique</option>
+            <option value="Livres">livres</option>
+          </select>
         </div>
         <div className="addProductItem">
           <label>Stock</label>

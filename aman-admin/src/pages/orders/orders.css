@@ -7,15 +7,29 @@
 
 .productListItem {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap; /* Allow items to wrap */
+  gap: 10px; /* Adjust the gap between products */
+  width: 300px; /* Set a maximum width for the product list */
 }
 
-.productListImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+.productBlock {
+  width: calc((100% - 20px) / 3); /* Calculate width for three items per row */
+  height: 100px; /* Adjust height as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.productListimg {
+  width: 60px;
+  height: 60px;
+  border-radius: 25%;
   object-fit: cover;
-  margin-right: 10px;
+  display: grid;
+  margin-right: 5px;
 }
 
 .productListEdit {

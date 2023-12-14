@@ -8,6 +8,8 @@ const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const cors = require("cors");
+const bodyParser = require("body-parser"); // Import bodyParser
+
 
 dotenv.config();
 
@@ -17,6 +19,10 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 
 app.use(cors());
 app.use(express.json());

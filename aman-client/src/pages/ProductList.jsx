@@ -58,7 +58,6 @@ const ProductList = ({themeToggler,theme}) => {
   return (
     <Container>
       <Navbar themeToggler={themeToggler} theme={theme} />
-      <Announcement />
       <Title style={{  color:'teal' }} >{cat}: </Title>
       <FilterContainer>
         <Filter>

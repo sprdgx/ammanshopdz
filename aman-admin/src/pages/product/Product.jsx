@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch} from "react-redux";
 import { updateProduct } from "../../redux/apiCalls";
 import './product.css'
@@ -22,28 +22,33 @@ export default function Product() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
-    try {
-    e.preventDefault();
-    updateProduct(productId, dispatch, { title, desc, price, inStock: parseInt(inStock), img });
-    setNot('Product Edited successfully');
-    setTimeout(() => {
-      setNot(null);
-      navigate('/products');
-    }, 3000); 
-    } catch (error) {
-      console.error("Error deleting order:", error);
-    }
-  };
-
-
-  const handleImgChange = (file) => { // Modify handleImgChange function
-    setImg(file.base64); // Set base64 data to state
-  };
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
+  useEffect(() => {
+    setStock(product.inStock);
+  }, [product.inStock]);
+
+  const handleClick = (e) => {
+    try {
+      e.preventDefault();
+      const updatedStock = inStock === '' ? product.inStock : parseInt(inStock);
+      updateProduct(productId, dispatch, { title, desc, price, inStock: updatedStock, img });
+      setNot('Product Edited successfully');
+      setTimeout(() => {
+        setNot(null);
+        navigate('/products');
+      }, 3000); 
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
+  };
+
+
+  const handleImgChange = (file) => {
+    setImg(file.base64);
+  };
 
   return (
     <div className="product">

@@ -21,7 +21,7 @@ export const register =async (dispatch, registerUser) => {
   }
 };
 
-export const placeOrder =async (dispatch, orderData) => {
+export const placeOrder = async (dispatch, orderData) => {
   try {
     const response = await publicRequest.post("/orders/placeorder", orderData);
     dispatch(orderPlaced(response.data));

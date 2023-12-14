@@ -3,7 +3,7 @@ export const sliderItems = [
       id: 1,
       img: "https://www.maison-connectee.eu/wp-content/uploads/2020/07/shutterstock_1081332008-1000x580.jpg",
       title: "Electro-menager",
-      desc: "Achetez vos électroménagers ici pour une maison moderne et fonctionnelle!",
+      desc: "Achetez vos électroménagers ici pour une maison moderne et qualité garantie pour confort optimal!",
       bg: "f5fafd",
       route:'/products/electromenager'
     },
@@ -11,7 +11,7 @@ export const sliderItems = [
       id: 2,
       img: "https://themvp.in/catalog/view/assets/img/PC-Shravan-Kumar.webp",
       title: "Informatique",
-      desc: "Trouvez ici tout ce dont vous avez besoin en informatique pour des équipements performants et innovants!S.",
+      desc: "Trouvez ici tout ce dont vous avez besoin en informatique pour des équipements performants et innovants!",
       bg: "fcf1ed",
       route:'/products/informatique'
     },

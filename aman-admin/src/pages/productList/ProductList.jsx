@@ -41,12 +41,14 @@ export default function ProductList() {
     {
       field: "product",
       headerName: "Product",
-      width: 200,
+      width: 300,
       renderCell: (params) => {
+        const titleWords = params.row.title.split(" ");
+        const shortenedTitle = titleWords.slice(0, 2).join(" "); // Get the first two words
         return (
           <div className="productListItem">
             <img className="productListImg" src={params.row.img} height={40} width={40} alt="" />
-            {params.row.title}
+            {shortenedTitle}
           </div>
         );
       },
@@ -76,7 +78,7 @@ export default function ProductList() {
                 className="deletedbutton"
                 onClick={() => handleDelete(params.row._id)}
               >
-                Delete Order
+                Delete Product
             </button>
           </>
         );

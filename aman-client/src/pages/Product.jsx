@@ -27,7 +27,7 @@ const Image = styled.img`
   height: 90vh;
   object-fit: cover;
   border-radius:50px;
-  ${mobile({ height: "40vh" })}
+  ${mobile({ height: "40vh" , width:'40vh'})}
 `;
 
 const InfoContainer = styled.div`
@@ -38,6 +38,8 @@ const InfoContainer = styled.div`
 
 const Title = styled.h1`
   font-weight: 200;
+  font-weight: bold;
+
 `;
 
 const Desc = styled.div`
@@ -71,32 +73,20 @@ const DetailTitle = styled.li`
 `;
 
 
-const Price = styled.span`
-  font-weight: 100;
-  font-size: 40px;
-  margin-top:20px;`;
-
-
-const AddContainer = styled.div`
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top:100px;
-  ${mobile({ width: "100%" })}
-`;
 
 const AmountContainer = styled.div`
   display: flex;
   align-items: center;
-  font-weight: 700;
+  font-size: 30px;
+  margin: 50px; 
+  ${mobile({ marginLeft:'15px', })}
 `;
 
 const Amount = styled.span`
   width: 30px;
   height: 30px;
   border-radius: 10px;
-  border: 1px solid teal;
+  border: 1px solid #009688;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,16 +95,33 @@ const Amount = styled.span`
 
 const Button = styled.button`
   padding: 15px;
-  border: 2px solid teal;
+  border: 2px solid #009688;
   background-color: white;
   cursor: pointer;
   font-weight: 500;
   border-radius: 20px;
-
-  &:hover {
-    background-color: #f8f4f4;
-  }
+  margin-left: 10px; /* Added margin */
+  ${mobile({ marginTop: "20px" })}
 `;
+
+const Done = styled.span`
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+`;
+
+const Price = styled.div`
+font-weight: bold;
+font-size: 40px;
+display: flex;
+${mobile({ paddingRight: "40px", fontSize:"20px", })}
+`
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 
 const Notification = styled.div`
 position: fixed;
@@ -198,17 +205,19 @@ const Product = ({themeToggler,theme}) => {
             </DetailList>         
             )}
           </Desc>
-          <Price>
-            {product.price} DA 
-          </Price>
-          <AddContainer>
+        <Done>
+         <Price>
+             {product.price}.DA
+         </Price>  
+          <ButtonWrapper>
             <AmountContainer>
               <Remove onClick={() => handleQuantity("dec")} />
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
             <Button onClick={handleClick}>Ajouter Au Panier</Button>
-          </AddContainer>
+          </ButtonWrapper>
+        </Done>
         </InfoContainer>
       </Wrapper>
       <Footer />

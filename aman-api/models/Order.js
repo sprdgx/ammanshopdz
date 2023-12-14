@@ -5,6 +5,7 @@ const OrderSchema = new mongoose.Schema(
     clientName: { type: String, required: true },
     clientNumber: { type: String, required: true },
     clientAddress: { type: String, required: true },
+    deliveryType: { type: String, enum: ['desktop', 'home'], required: true },
     price:{type: String, required:true },
     confirmed: {type:Boolean, default: false},
     products: [

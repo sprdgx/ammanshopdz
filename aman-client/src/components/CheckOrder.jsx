@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { placeOrder } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
-import "./checkorder.css";
+import '../style/checkorder.css'
 import styled from "styled-components";
 import CloseIcon from '@material-ui/icons/Close'
 import PersonIcon from '@material-ui/icons/Person';
@@ -23,7 +23,7 @@ border-radius: 5px;
 animation: slideIn 0.5s ease-out forwards, fadeOut 0.5s ease-in 2.5s forwards;
 `;
 
-const Popup = ({ setIsOpenPopup }) => {
+const Popup = ({ setIsOpenPopup, selectedDeliveryType  }) => {
   const [clientName, setClientName] = useState("");
   const [clientNumber, setClientNumber] = useState("");
   const [clientAddress, setClientAddress] = useState("");
@@ -32,27 +32,31 @@ const Popup = ({ setIsOpenPopup }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
     const totalPrice = cart.products.reduce((total, product) => {
       return total + product.quantity * product.price;
     }, 0);
-  
-    placeOrder(dispatch, {
-      clientName,
-      clientNumber,
-      clientAddress,
-      price: totalPrice,
-      products: cart.products.map((product) => ({
-        productId: product._id,
-        quantity: product.quantity,
-        image: product.img,
-      })),
-    });
-    setNot('La commande est passée.😊');
-    setTimeout(() => {
-      setNot(null);
-    }, 3000); 
+
+    try {
+      const response = await placeOrder(dispatch, {
+        clientName,
+        clientNumber,
+        clientAddress,
+        price: totalPrice,
+        products: cart.products.map((product) => ({
+          productId: product._id,
+          quantity: product.quantity,
+          image: product.img,
+        })),
+        deliveryType: selectedDeliveryType, // Include the selected delivery type here
+      });
+
+      // Handle the response if needed...
+    } catch (error) {
+      console.error("Error placing the order:", error);
+      // Handle error case
+    }
   };
 
   function renderCheckoutOrFillCart() {
