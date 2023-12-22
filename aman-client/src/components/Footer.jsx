@@ -12,7 +12,7 @@ import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
-  ${mobile({ flexDirection: "column" ,})}
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Left = styled.div`
@@ -23,11 +23,11 @@ const Left = styled.div`
 `;
 
 const Logo = styled.h1`
-color: white;
-background-color: teal;
-width:225px;
-padding-left:10px;
-border-radius: 10px;
+  color: white;
+  background-color: teal;
+  width: 225px;
+  padding-left: 10px;
+  border-radius: 10px;
 `;
 
 const Desc = styled.p`
@@ -36,6 +36,12 @@ const Desc = styled.p`
 
 const SocialContainer = styled.div`
   display: flex;
+  justify-content: center; /* Horizontally center items */
+  align-items: center; /* Vertically center items */
+  height: 100%; /* Set height to occupy full height of the container */
+  ${mobile({
+    height: "auto", /* Reset height for mobile */
+  })}
 `;
 
 const SocialIcon = styled.div`
@@ -50,15 +56,15 @@ const SocialIcon = styled.div`
   margin-right: 20px;
 `;
 
-
 const Title = styled.h3`
   margin-bottom: 30px;
 `;
 
-
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  display: flex;
+  justify-content: flex-end; /* Align items to the right */
 `;
 
 const ContactItem = styled.div`
@@ -67,39 +73,35 @@ const ContactItem = styled.div`
   align-items: center;
 `;
 
-
 const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>AMANSHOP.</Logo>
-        <Desc>
-        Amanshop : Votre destination pour l'électroménager, l'informatique et les livres, offrant qualité et diversité. Équipez votre maison, optimisez vos technologies et enrichissez votre collection littéraire avec confiance grâce à nos produits de pointe et à notre service client dévoué.
-        </Desc>
-        <SocialContainer> 
-          <a href="https://www.facebook.com/profile.php?id=61552805934954" target="_blank">
-            <SocialIcon color="3B5999">
-            <Facebook />
-          </SocialIcon>
-          </a>
-          <a href="https://www.instagram.com/_aman__shop_/" target="_blank">
-          <SocialIcon color="E4405F">
-            <Instagram />
-          </SocialIcon>
-          </a>
-        </SocialContainer>
-      </Left>
-      <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room style={{marginRight:"10px"}}/>24 Rue des Mandarines groupe des propriétés 243 Tamaris Mohammadia Alger
+          <Room style={{ marginRight: "10px" }} />
+          24 Rue des Mandarines groupe des propriétés 243 Tamaris Mohammadia Alger
         </ContactItem>
         <ContactItem>
-          <Phone style={{marginRight:"10px"}}/> 0560152618/0560075910
+          <Phone style={{ marginRight: "10px" }} /> 0554628035 / 0550675280
         </ContactItem>
         <ContactItem>
-          <MailOutline style={{marginRight:"10px"}} /> aman@ammanshopdz.com
+          <MailOutline style={{ marginRight: "10px" }} /> aman@ammanshopdz.com
         </ContactItem>
+      </Left>
+      <Right>
+        <SocialContainer>
+          <a href="https://www.facebook.com/profile.php?id=61552805934954" target="_blank">
+            <SocialIcon color="3B5999">
+              <Facebook />
+            </SocialIcon>
+          </a>
+          <a href="https://www.instagram.com/_aman__shop_/" target="_blank">
+            <SocialIcon color="E4405F">
+              <Instagram />
+            </SocialIcon>
+          </a>
+        </SocialContainer>
       </Right>
     </Container>
   );

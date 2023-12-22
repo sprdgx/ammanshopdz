@@ -83,6 +83,18 @@ export default function Orders() {
       },
     },
     {
+      field: "deliveryType", // Add Delivery Type field
+      headerName: "Delivery Type",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <div>
+            {params.row.deliveryType}
+          </div>
+        );
+      },
+    },
+    {
       field: "clientInfo",
       headerName: "Client Info",
       width: 370,

@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import Announcement from "../components/Announcement";
-import Categories from "../components/Categories";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
+import AboutUs from "../components/AboutUs";
 import Map from "../components/Map";
 import styled from "styled-components";
 
@@ -25,7 +24,7 @@ const Home = ({themeToggler, theme}) => {
       <HomeContainer>
       <Navbar themeToggler={themeToggler} theme={theme}  />
       <Slider />
-      <Categories />
+      <AboutUs/>
       <Products/>
       <Footer/>
       <Map/>

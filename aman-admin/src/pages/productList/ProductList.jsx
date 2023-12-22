@@ -41,7 +41,7 @@ export default function ProductList() {
     {
       field: "product",
       headerName: "Product",
-      width: 300,
+      width: 400,
       renderCell: (params) => {
         const titleWords = params.row.title.split(" ");
         const shortenedTitle = titleWords.slice(0, 2).join(" "); // Get the first two words
@@ -53,7 +53,7 @@ export default function ProductList() {
         );
       },
     },
-    { field: "inStock", headerName: "Stock", width: 200 },
+    { field: "inStock", headerName: "Stock", width: 100 },
     {
       field: "status",
       headerName: "Status",

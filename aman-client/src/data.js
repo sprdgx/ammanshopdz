@@ -1,26 +1,26 @@
 export const sliderItems = [
     {
       id: 1,
-      img: "https://www.maison-connectee.eu/wp-content/uploads/2020/07/shutterstock_1081332008-1000x580.jpg",
-      title: "Electro-menager",
-      desc: "Achetez vos électroménagers ici pour une maison moderne et qualité garantie pour confort optimal!",
-      bg: "f5fafd",
+      img: "https://github.com/sprdgx/ammanshop-pictures/blob/main/image33.png?raw=true",
+      title: "Innovation",
+      desc: "Découvrez une technologie avancée pour une vie plus intelligente et une gestion domestique sans faille.",
+      bg: "teal",
       route:'/products/electromenager'
     },
     {
       id: 2,
-      img: "https://themvp.in/catalog/view/assets/img/PC-Shravan-Kumar.webp",
-      title: "Informatique",
-      desc: "Trouvez ici tout ce dont vous avez besoin en informatique pour des équipements performants et innovants!",
-      bg: "fcf1ed",
+      img: "https://github.com/sprdgx/ammanshop-pictures/blob/main/image22.png?raw=true",
+      title: "Convenience",
+      desc: " Simplifiez la vie sans effort avec des appareils fiables pour un confort quotidien et une facilité d'utilisation.",
+      bg: "teal",
       route:'/products/informatique'
     },
     {
       id: 3,
-      img: "https://github.com/sprdgx/ammanshop-pictures/blob/main/livre.jpg?raw=true",
-      title: "Les Livres",
-      desc: "Découvrez notre large sélection de livres pour nourrir votre esprit et enrichir votre bibliothèque!",
-      bg: "fbf0f4",
+      img: "https://github.com/sprdgx/ammanshop-pictures/blob/main/image4.png?raw=true",
+      title: "Efficacité",
+      desc: "Rationalisez les tâches, gagnez du temps et augmentez la productivité avec des appareils de pointe.",
+      bg: "teal",
       route:'/products/livres'
     },
   ];

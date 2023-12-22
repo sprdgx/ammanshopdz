@@ -90,7 +90,6 @@ const Amount = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0px 5px;
 `;
 
 const Button = styled.button`
